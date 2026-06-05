@@ -23,6 +23,7 @@ bcc -x -i -L -Md reboot.c -o reboot.com
 bcc -x -i -L -Md pwd.c -o pwd.com
 bcc -x -i -L -Md clear.c -o clear.com
 bcc -x -i -L -Md sleep.c -o sleep.com
+bcc -x -i -L -Md color.c -o color.com
 
 cp *.c32 CD_root/isolinux/
 cp *.com CD_root/isolinux/
