@@ -25,6 +25,7 @@ bcc -x -i -L -Md clear.c -o clear.com
 bcc -x -i -L -Md sleep.c -o sleep.com
 bcc -x -i -L -Md color.c -o color.com
 bcc -x -i -L -Md wait.c -o wait.com
+bcc -x -i -L -Md time.c -o time.com
 
 cp *.c32 CD_root/isolinux/
 cp *.com CD_root/isolinux/
