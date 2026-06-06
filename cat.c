@@ -36,6 +36,12 @@ int main()
                         sputc(13);
                         sputc(10);
                         t=1;
+                        n=filesizes();
+                        sputc((char)n);
+                        sputs("\r\n");
+
+
+                        if ((char)n==6) return 0;
 			f1=opens(argv);
 		
 		
@@ -140,6 +146,7 @@ char *s1;
 .globl _closes
 .globl _reads
 .globl _copys
+.globl _filesizes
 _cls3:
     mov si,sp
     add si,*0x2
@@ -182,6 +189,25 @@ _getchar:
     mov ax,*0
     int $16
     ret
+_filesizes:
+    mov si,sp
+    add si,*2
+    mov dx,[si]
+    mov si,dx
+    mov ax,*0x06
+    int $22
+    push ax 
+    cmp ax,0
+    jnz _filesize2
+    pop ax
+    mov ah,0
+    ret
+_filesize2:
+    mov ax,*0x08
+    int $22
+    pop ax
+    mov ah,0
+    ret  
 _opens:
     mov si,sp
     add si,*2
