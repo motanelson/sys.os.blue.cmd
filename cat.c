@@ -36,7 +36,7 @@ int main()
                         sputc(13);
                         sputc(10);
                         t=1;
-                        n=filesizes();
+                        n=filesizes(argv);
                         sputc((char)n);
                         sputs("\r\n");
 
@@ -57,7 +57,7 @@ int main()
 
 			closes(f1);
 		
-		
+	//systems("cmd.com");
 	return 0;
 	
 }
@@ -147,6 +147,7 @@ char *s1;
 .globl _reads
 .globl _copys
 .globl _filesizes
+.globl _systems
 _cls3:
     mov si,sp
     add si,*0x2
@@ -179,6 +180,18 @@ _copys:
     mov si,0x81
     ret
 _sputc:
+    mov si,sp
+    add si,*0x2
+    mov dx,[si]
+    cmp dl,*10
+    jz _sputc2
+    mov ah,*02
+    int *0x21
+    ret
+_sputc2:
+    mov dx,*13
+    mov ah,*02
+    int *0x21
     mov si,sp
     add si,*0x2
     mov dx,[si]
@@ -237,5 +250,18 @@ _reads:
     int $22
     mov ax,cx
     ret
+_systems:
+    mov bx,sp
+    add bx,*0x2
+    mov dx,[bx]
+    mov bx,dx
+    
+    mov ax,*0x3
+    int $22
+    ret
+systems2:
+    mov ax,1
+    ret
+
 #endasm
 
